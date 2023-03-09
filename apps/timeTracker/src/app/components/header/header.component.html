@@ -1,0 +1,14 @@
+<div class="header">
+  <div class="header__hamburger" (click)="onMenuClick()">🍔</div>
+  <div class="header__title">
+    {{ title }}
+  </div>
+</div>
+
+<app-sidebar
+  [sidebarOpen]="sidebarOpen"
+  [list]="sidebarList"
+  (onClose)="closeSidebar()"
+  (onButtonClick)="buttonClickedHandler($event)"
+>
+</app-sidebar>

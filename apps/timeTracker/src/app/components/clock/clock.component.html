@@ -1,0 +1,26 @@
+<div class="clock">
+  <div class="clock__topButtons">
+    <button class="clock__timer" (click)="onTimerButtonClick()">Timer</button>
+    <button class="clock__stopper" (click)="onStopperButtonClick()">
+      Stopper
+    </button>
+  </div>
+  <div>
+    <input
+      type="number"
+      *ngIf="displayTimmerText"
+      (keyup)="onInputChange($event)"
+    />
+  </div>
+
+  <div class="clock__container">
+    <div class="clock__number">{{ runTimerValue * 1000 | date : "mm:ss" }}</div>
+  </div>
+
+  <div class="clock__bottomButtons">
+    <button class="clock__start_stop" (click)="onStartStopButtonClick()">
+      {{ startStopButtonText }}
+    </button>
+    <button class="clock__reset" (click)="onResetButtonClick()">Reset</button>
+  </div>
+</div>

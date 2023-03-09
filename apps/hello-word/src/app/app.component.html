@@ -1,0 +1,12 @@
+<h1>Hello World {{ someVar }}</h1>
+<button type="button" (click)="handleClick($event)">I am button</button>
+
+<div *ngIf="isValid">i am valid</div>
+<div class="colored" [ngClass]="{ blue: isValid }">
+  i am {{ isValid ? "blue" : "red" }}
+</div>
+
+<h3>today is : {{ today | date : "medium" }}</h3>
+
+<h1>random number in app component : {{ rand }}</h1>
+<app-hello-world></app-hello-world>

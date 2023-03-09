@@ -1,0 +1,13 @@
+<div class="sidebar" *ngIf="sidebarOpen">
+  <ul>
+    <li class="sidebar__item" *ngFor="let item of list">
+      <button (click)="clickOnSidebarButton(item)">{{ item }}</button>
+    </li>
+  </ul>
+</div>
+
+<div
+  (click)="closeSidebar()"
+  class="backdrop"
+  [ngClass]="{ 'backdrop--open': sidebarOpen }"
+></div>
