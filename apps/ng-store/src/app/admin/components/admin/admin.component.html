@@ -1,0 +1,8 @@
+<p>admin works!</p>
+<div class="admin">
+  <div class="admin__products" *ngIf="products.length">
+    <div class="admin__product" *ngFor="let product of products">
+      <app-card [product]="product"> </app-card>
+    </div>
+  </div>
+</div>

@@ -5,10 +5,29 @@
     background: url("/assets/banner1.avif");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
 
+    text-align: center;
     @media screen and (max-width: 1366px) {
-      background-size: cover;
+      background-size: contain;
     }
+  }
+  &__text {
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #000000, 5px 4px 0px rgba(0, 0, 0, 0.15);
+    font-size: 70px;
+    padding: 50px 0;
+    font-family: "Bebas Neue", cursive;
+    position: relative;
+  }
+  &__products {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  &__product {
+    width: 30%;
   }
 }
