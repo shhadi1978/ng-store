@@ -9,36 +9,62 @@
       #input
     />
   </mat-form-field>
-
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    <!-- Generate the columns dynamically -->
+  <table class="admin__table" mat-table [dataSource]="dataSource">
     <ng-container
       *ngFor="let column of displayedColumns"
       [matColumnDef]="column"
     >
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ column | titlecase }}
-      </th>
-
-      <td [ngSwitch]="column">
-        <ng-container *ngSwitchCase="'Image'">
-          <td mat-cell *matCellDef="let element">
-            <img width="50px" src="{{ element }}" />
-          </td>
-        </ng-container>
-        <ng-container *ngSwitchCase="'Price'">
-          <span>element.Price</span>
-        </ng-container>
+      <th mat-header-cell *matHeaderCellDef [ngSwitch]="column">
+        <ng-container *ngSwitchCase="'menuItems'"> </ng-container>
         <ng-container *ngSwitchDefault>
-          <td mat-cell *matCellDef="let element">{{ element }}</td>
+          {{ column | titlecase }}
         </ng-container>
+      </th>
+      <td mat-cell *matCellDef="let element" [ngSwitch]="column">
+        <ng-container *ngSwitchCase="'images'">
+          <ng-container *ngFor="let image of element[column]">
+            <img class="admin__image" [src]="image" alt="Image" />
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'thumbnail'">
+          <img class="admin__image" [src]="element.thumbnail" alt="thumbnail" />
+        </ng-container>
+        <ng-container *ngSwitchCase="'menuItems'">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              *ngFor="let item of element.menuItems"
+              (click)="onMenuItemClick(item, element.id)"
+            >
+              <mat-icon>{{ item.action }}</mat-icon>
+              {{ item.label }}
+            </button>
+          </mat-menu>
+        </ng-container>
+
+        <!-- <ng-container *ngSwitchCase="'description'">
+          <div class="admin__cell-text" matTooltip="{{ element[column] }}">
+            {{ element[column] }}
+          </div></ng-container
+        > -->
+        <ng-container *ngSwitchDefault
+          ><div class="admin__cell-text" matTooltip="{{ element[column] }}">
+            {{ element[column] }}
+          </div></ng-container
+        >
       </td>
     </ng-container>
 
-    <!-- Generate the table rows dynamically -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  <button mat-fab (click)="onClickAddNewProduct()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

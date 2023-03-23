@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/product/services/product.service';
-import { IProduct } from 'src/app/shared/Models';
+import { IProduct, IProduct1 } from 'src/app/shared/Models';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +9,16 @@ import { IProduct } from 'src/app/shared/Models';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public products: IProduct[] = [];
+  public products1?: IProduct1;
+
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.productService.getProducts$().subscribe((data) => {
-      this.products = data;
-      console.log(data);
+      this.products = data.products;
+      console.log(this.products);
     });
+    this.productService.fechProducts();
   }
 
   ngOnDestroy(): void {}
